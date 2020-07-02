@@ -1,5 +1,6 @@
 ﻿using LeagueBot.DesignPattern;
 using LeagueBot.Game;
+using LeagueBot.Api;
 using LeagueBot.Game.Enums;
 using LeagueBot.Image;
 using LeagueBot.IO;
@@ -16,6 +17,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static LeagueBot.Windows.Interop;
+using LeagueBot.ApiHelpers;
 
 namespace LeagueBot
 {
@@ -38,11 +40,60 @@ namespace LeagueBot
 
             checkChampList();
 
-            if (args.Length == 0)
+            /* if (args.Length == 0)
                 HandleCommand(string.Empty);
             else
-                HandleCommand(args[0]);
-            
+                HandleCommand(args[0]); */
+
+            BotApi bot = new BotApi();
+            Random r = new Random();
+            Process.Start("C:\\Riot Games\\League of Legends\\LeagueClient.exe");
+            bot.waitProcessOpen("RiotClientServices");
+
+            BotHelper.Wait(3000);
+            LoginHandler.Login("elighnothy", "test1234");
+            BotHelper.Wait(3000);
+            if (TextHelper.TextExists(769, 271, 262, 41, "TERMS OF SERVICE"))
+            {
+                Logger.Write("Accept the Terms of Service!");
+                for (int i = 0; i < 100; i++)
+                {
+                    if (ImageHelper.GetColor(816, 739) == "#BC252A")
+                        break;
+
+                    InputHelper.LeftClick(1168, 642);
+                }
+                InputHelper.LeftClick(816, 739);
+            }
+
+            bot.waitProcessOpen("LeagueClientUX");
+            bot.bringProcessToFront("LeagueClientUX");
+            bot.centerProcess("LeagueClientUX");
+
+            Logger.Write("Bot is ready!");
+            BotHelper.Wait(10000);
+
+            // 421 220
+            InputHelper.LeftClick(421, 220);
+            BotHelper.Wait(r.Next(800, 1300));
+            // 464 285
+            InputHelper.LeftClick(464, 285);
+            BotHelper.Wait(r.Next(800, 1300));
+            // 765 676
+            InputHelper.LeftClick(765, 676);
+            BotHelper.Wait(r.Next(800, 1300));
+            // 824 870
+            InputHelper.LeftClick(824, 870);
+            BotHelper.Wait(r.Next(800, 1300));
+
+            InputHelper.LeftClick(824, 870);
+
+            TextHelper.WaitForText(827, 555, 267, 36, "MATCH FOUND");
+            Logger.Write("MATCH FOUND!");
+            BotHelper.Wait(r.Next(800, 2000));
+            // InputHelper.LeftClick(960, 741);
+            Logger.Write("MATCH ACCEPTED!");
+
             Console.Read();
         }
 
@@ -56,8 +107,8 @@ namespace LeagueBot
                 line = Console.ReadLine();
             } else { line = restart; }
             
-
-            PatternsManager.Execute(line);
+            
+            // PatternsManager.Execute(line);
 
             HandleCommand(string.Empty);
         }

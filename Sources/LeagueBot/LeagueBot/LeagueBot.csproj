@@ -92,6 +92,7 @@
     <Compile Include="Game\Enums\ShopItemTypeEnum.cs" />
     <Compile Include="Game\Enums\SideEnum.cs" />
     <Compile Include="Game\ApiMember.cs" />
+    <Compile Include="Game\LoginHandler.cs" />
     <Compile Include="Game\Misc\Camera.cs" />
     <Compile Include="Game\Misc\Chat.cs" />
     <Compile Include="Game\Misc\Item.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Game\Settings\LeagueManager.cs" />
     <Compile Include="IO\FileIO.cs" />
     <Compile Include="Patterns\PatternScript.cs" />
+    <Compile Include="Scripts\StartMatch.cs" />
     <Compile Include="Texts\TextUtils.cs" />
     <Compile Include="Images\ImageUtils.cs" />
     <Compile Include="Texts\TextCache.cs" />
@@ -141,7 +143,9 @@
       <HintPath>..\packages\Tesseract.3.3.0\lib\net45\Tesseract.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Game\Login\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
