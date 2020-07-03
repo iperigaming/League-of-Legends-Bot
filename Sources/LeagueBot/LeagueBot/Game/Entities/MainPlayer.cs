@@ -373,6 +373,7 @@ namespace LeagueBot.Game.Entities
             InputHelper.MoveMouse(go.X - 40, go.Y + 135);
             BotHelper.Wait(350);
             InputHelper.PressKey("A");
+            InputHelper.RightClick(go.X - 40, go.Y + 135);
         }
         public bool isThereAnAllyCreep()
         {
